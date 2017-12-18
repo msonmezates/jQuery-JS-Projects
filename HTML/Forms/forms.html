@@ -8,9 +8,25 @@
 
 	<!-- action - where the form send data to -->
 	<!-- method - what http method (get/post) -->
-	<form action="http://wikipedia.ord">
-		<input name="username" type="text" placeholder="username">
-		<input name="password" type="password" placeholder="password">
+	<!-- <form action="http://wikipedia.ord">
+		<label>
+			Username:
+			<input name="username" type="text" placeholder="username">
+		</label>
+
+		<label>
+			Password:
+			<input name="password" type="password" placeholder="password">
+		</label>
+		
+		<input type="submit">
+	</form> -->
+
+	<form>
+		<label for="username">Username:</label>
+		<input id="username" type="text" placeholder="username">
+		<label for="password">Password:</label>
+		<input id="password" type="password" placeholder="password">
 		<input type="submit">
 	</form>
 
