@@ -1,0 +1,16 @@
+body {
+	background: url(https://previews.123rf.com/images/blackzheep/blackzheep1412/blackzheep141200019/34378536-old-wood-grain-texture-background-Stock-Photo.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+h1 {
+	color: #0E2951;
+	border: 5px dashed purple;
+}
+li:first-child{
+	color: rgba(240,20,20,0.8);
+}
+h4 {
+	color: rgb(100,0,100);
+	background-color: rgb(255,100,80);
+}
