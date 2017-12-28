@@ -13,4 +13,9 @@ console.log(a);
 a.textContent = 'LINK TO CORGIS!';
 console.log(a);
 
+let h1 = document.querySelector('h1').classList.add('pink');
+console.log(h1);
+
+
+
 
