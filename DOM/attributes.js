@@ -16,6 +16,12 @@ console.log(a);
 let h1 = document.querySelector('h1').classList.add('pink');
 console.log(h1);
 
+//add event listener
+let heading = document.querySelector('h1')
+heading.addEventListener('click', () => alert('h1 was clicked!'))
+
+heading.addEventListener('click', () => heading.style.background = 'orange');
+
 
 
 
