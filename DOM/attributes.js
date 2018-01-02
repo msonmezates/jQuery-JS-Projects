@@ -22,6 +22,9 @@ heading.addEventListener('click', () => alert('h1 was clicked!'))
 
 heading.addEventListener('click', () => heading.style.background = 'orange');
 
-
+let list = document.querySelectorAll('li');
+for(li of list) {
+  li.addEventListener('click', ()=> li.style.color = 'blue')
+}
 
 
