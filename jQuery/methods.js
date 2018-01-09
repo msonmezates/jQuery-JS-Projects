@@ -41,3 +41,9 @@ $('img').css('width','200px') //change img sizes to 200px
 $('img:first-of-type').css('height','300px') //change the first image's height
 $('img:first-of-type').css('src','http://www.whatever') //we can change the source
 $('img').last().css('width','100px') // we can target last element with last()
+
+//val() method
+$('input').val() //outputs empty string if there is nothing otherwise it gives the value for input
+$('input').val('Mehmet') //updates the input as 'Mehmet'
+$('input').val("") // By using empty string, we can reset the text input. This is very common
+$('select').val() //outputs 'Toad' if we already selected Toad so we can use with dropdown menus
