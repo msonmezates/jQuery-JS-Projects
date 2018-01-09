@@ -47,3 +47,11 @@ $('input').val() //outputs empty string if there is nothing otherwise it gives t
 $('input').val('Mehmet') //updates the input as 'Mehmet'
 $('input').val("") // By using empty string, we can reset the text input. This is very common
 $('select').val() //outputs 'Toad' if we already selected Toad so we can use with dropdown menus
+
+//Manupulating classes
+$('h1').addClass('correct') //h1 turns to green
+$('h1').removeClass('correct') //removes .correct class
+$('li').addClass('wrong') //all li has .wrong class properties
+$('li').removeClass('wrong')
+$('li').first().toggleClass('done') //the first li item has .done class properties
+$('li').first().toggleClass('done') //if I apply the same class then it goes back to old class...toggling
