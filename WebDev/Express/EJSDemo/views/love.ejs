@@ -1,4 +1,12 @@
-<h1>This is the love.ejs file</h1>
-<p>You fell in love with: <%= thingVar.toUpperCase() %></p> 
+<h2>You fell in love with: <%= thingVar.toUpperCase() %></h2> 
+
+<% if(thingVar.toLowerCase() === 'rusty') { %>
+  <p>Good Choice!</p>
+<% } else { %>
+  <p>Bad choice! You should've said Rusty</p>
+<% } %>
+
+<p>P.S. This is the love.ejs file</p>
 
 {# This <%= %> format enables us to use javascript variables in ejs files #}
+{# This <% %>(no equals) format enables us to execute loops/condiiton/flow etc in ejs files #}
