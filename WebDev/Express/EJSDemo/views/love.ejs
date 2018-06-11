@@ -1,3 +1,5 @@
+<% include partials/header %>
+
 <h2>You fell in love with: <%= thingVar.toUpperCase() %></h2> 
 
 <% if(thingVar.toLowerCase() === 'rusty') { %>
@@ -8,5 +10,4 @@
 
 <p>P.S. This is the love.ejs file</p>
 
-{# This <%= %> format enables us to use javascript variables in ejs files #}
-{# This <% %>(no equals) format enables us to execute loops/condiiton/flow etc in ejs files #}
+<% include partials/footer %>
