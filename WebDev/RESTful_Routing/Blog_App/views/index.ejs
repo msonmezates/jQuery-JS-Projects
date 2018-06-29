@@ -1,0 +1,14 @@
+<h1>Welcome to The Blog App</h1>
+
+<% blogs.map(blog => { %>
+  <div>
+    <h2>
+      <%= blog.title %>
+    </h2>
+    <img src="<%= blog.image %>">
+    <span><%= blog.createdAt %></span>
+    <p>
+      <%= blog.body %>
+    </p>
+  </div>
+<% }) %>
