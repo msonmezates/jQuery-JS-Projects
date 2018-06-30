@@ -8,7 +8,7 @@ app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public')); // this is necessary for custom stylesheet
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride('_method')); // this middleware helps to override POST method as PUT
+app.use(methodOverride('_method')); // this middleware helps to override POST method as PUT or DELETE
 
 mongoose.connect('mongodb://localhost/blog');
 
@@ -82,6 +82,15 @@ app.put('/blogs/:id',(req,res) => {
     if(err) console.log(err);
     else res.redirect('/blogs/' + id);
   });
+});
+// DELETE route
+app.delete('/blogs/:id', (req,res) => {
+  const { id } = req.params;
+  const { blog } = req.body;
+  Blog.findByIdAndRemove(id, (err => { // since I don't have any data, I don't have to pass in anything else 
+    if(err) console.log(err);
+    else res.redirect('/blogs');
+  }))
 });
 
 app.listen(process.env.PORT || 3000, ()=> console.log('Blog server has started...'));
