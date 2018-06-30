@@ -21,11 +21,11 @@ const blogSchema = new mongoose.Schema({
 const Blog = mongoose.model('Blog', blogSchema);
 
 // Test DB
-// Blog.create({
-//   title: 'Test',
-//   image: 'https://images.pexels.com/photos/126407/pexels-photo-126407.jpeg?auto=compress&cs=tinysrgb&h=350',
-//   body: 'This is the test body'
-// });
+Blog.create({
+  title: 'Test',
+  image: 'https://images.pexels.com/photos/126407/pexels-photo-126407.jpeg?auto=compress&cs=tinysrgb&h=350',
+  body: 'This is the test body'
+});
 
 // RESTFUL ROUTES
 
@@ -52,6 +52,16 @@ app.post('/blogs', (req,res) => {
   Blog.create(blog, (err, blog) => {
     if(err) console.log(err);
     else res.redirect('/blogs');
+  });
+});
+// SHOW route
+app.get('/blogs/:id',(req,res) => {
+  const { id } = req.params; //this id comes from the url
+  Blog.findById(id,(err, foundBlog) => {
+    if(err) console.log(err);
+    else {
+      res.render('blogDetail', { blog: foundBlog });
+    }
   });
 });
 
