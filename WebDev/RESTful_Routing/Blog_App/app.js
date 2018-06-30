@@ -1,5 +1,6 @@
 const bodyParser = require('body-parser'),
 methodOverride = require('method-override'),
+expressSanitizer = require('express-sanitizer'),
 mongoose = require('mongoose'),
 express = require('express'),
 app = express();
@@ -8,6 +9,7 @@ app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public')); // this is necessary for custom stylesheet
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressSanitizer()); // express-sanitizer has to be used right after body-parse
 app.use(methodOverride('_method')); // this middleware helps to override POST method as PUT or DELETE
 
 mongoose.connect('mongodb://localhost/blog');
@@ -49,9 +51,9 @@ app.get('/blogs/new', (req,res) => {
 });
 // CREATE route
 app.post('/blogs', (req,res) => {
+  req.body.blog.body = req.sanitize(req.body.blog.body); //this is the way to sanitize our data so that <script></script> will be ignored inside the form.
   // create the blog and redirect
-  const { blog } = req.body;
-  Blog.create(blog, (err, blog) => {
+  Blog.create(req.body.blog, (err, blog) => {
     if(err) console.log(err);
     else res.redirect('/blogs');
   });
@@ -76,6 +78,7 @@ app.get('/blogs/:id/edit',(req,res) => {
 });
 // UPDATE route
 app.put('/blogs/:id',(req,res) => {
+  req.body.blog.body = req.sanitize(req.body.blog.body);
   const { id } = req.params;
   const { blog } = req.body;
   Blog.findByIdAndUpdate(id, blog, (err, updatedBlog) => {
