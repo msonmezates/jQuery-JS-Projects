@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser'),
+methodOverride = require('method-override'),
 mongoose = require('mongoose'),
 express = require('express'),
 app = express();
@@ -7,6 +8,7 @@ app = express();
 app.set('view engine', 'ejs');
 app.use(express.static('public')); // this is necessary for custom stylesheet
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method')); // this middleware helps to override POST method as PUT
 
 mongoose.connect('mongodb://localhost/blog');
 
@@ -21,11 +23,11 @@ const blogSchema = new mongoose.Schema({
 const Blog = mongoose.model('Blog', blogSchema);
 
 // Test DB
-Blog.create({
-  title: 'Test',
-  image: 'https://images.pexels.com/photos/126407/pexels-photo-126407.jpeg?auto=compress&cs=tinysrgb&h=350',
-  body: 'This is the test body'
-});
+// Blog.create({
+//   title: 'Test',
+//   image: 'https://images.pexels.com/photos/126407/pexels-photo-126407.jpeg?auto=compress&cs=tinysrgb&h=350',
+//   body: 'This is the test body'
+// });
 
 // RESTFUL ROUTES
 
@@ -62,6 +64,23 @@ app.get('/blogs/:id',(req,res) => {
     else {
       res.render('blogDetail', { blog: foundBlog });
     }
+  });
+});
+// EDIT route
+app.get('/blogs/:id/edit',(req,res) => {
+  const { id } = req.params;
+  Blog.findById(id, (err, foundBlog) => {
+    if(err) console.log(err);
+    else res.render('edit', { blog: foundBlog });
+  });
+});
+// UPDATE route
+app.put('/blogs/:id',(req,res) => {
+  const { id } = req.params;
+  const { blog } = req.body;
+  Blog.findByIdAndUpdate(id, blog, (err, updatedBlog) => {
+    if(err) console.log(err);
+    else res.redirect('/blogs/' + id);
   });
 });
 
