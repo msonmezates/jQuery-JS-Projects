@@ -26,12 +26,16 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // ROUTES
+const isLoggedIn = (req, res, next) => {
+  if(req.isAuthenticated()) return next();
+  res.redirect('/login');
+}
 
 app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.get('/secret', (req, res) => {
+app.get('/secret', isLoggedIn, (req, res) => { // isLoggedIn checks if user's logged in or logged out
   res.render('secret');
 });
 
@@ -62,6 +66,12 @@ app.post('/login', passport.authenticate('local', {
   successRedirect: '/secret',
   failureRedirect: '/login'
 }), (req, res) => {
+});
+
+// Logout Routes
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 app.listen(process.env.PORT || 3000, () => console.log('Server has started...'));
